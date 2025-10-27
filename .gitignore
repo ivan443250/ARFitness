@@ -5,8 +5,8 @@
 /Assets/*
 
 # Assets/_ProjectV1
-!/Assets/_ProjectV1/
-!/Assets/_ProjectV1/**/
+!/Assets/_Project/
+!/Assets/_Project/**/
 
 # File types
 *.csproj
