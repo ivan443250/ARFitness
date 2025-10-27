@@ -1,0 +1,40 @@
+
+# Assets
+!/Assets/
+/Assets/*
+
+# Assets/_ProjectV1
+!/Assets/_ProjectV1/
+!/Assets/_ProjectV1/**/
+
+# File types
+*.csproj
+*.unityproj
+*.sln
+*.suo
+*.tmp
+*.user
+*.userprefs
+*.pidb
+*.booproj
+*.svd
+*.pdb
+*.mdb
+*.opendb
+*.VC.db
+*.json
+*.aseprite
+*.meta
+*.apk
+*.aab
+*.unitypackage
+*.unitypackage.meta
+*.app
+*.anim
+*.mat
+*.controller
+*.prefab
+*.mp3
+*.asset
+*.shadergraph
+*.unity
