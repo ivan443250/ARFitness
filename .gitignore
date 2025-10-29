@@ -36,6 +36,4 @@
 *.controller
 *.prefab
 *.mp3
-*.asset
 *.shadergraph
-*.unity
