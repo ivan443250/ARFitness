@@ -48,7 +48,7 @@ public class GuestProfileMaker : MonoBehaviour
         }
         else
         {
-            _delayedDisplayer.DisplayElementForSeconds(1);
+            _delayedDisplayer.DisplayElementForSeconds("ƒанные указаны не верно или не указаны!", 1);
         }
     }
 }

@@ -124,7 +124,7 @@ public class ProfileMaker : MonoBehaviour
         }
         else
         {
-            _displayer.DisplayElementForSeconds(1);
+            _displayer.DisplayElementForSeconds("Данные введены неверно или не введены!", 1);
             return;
         }
     }
