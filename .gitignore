@@ -25,7 +25,6 @@
 *.VC.db
 *.json
 *.aseprite
-*.meta
 *.apk
 *.aab
 *.unitypackage
