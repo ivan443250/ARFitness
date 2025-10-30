@@ -1,6 +1,3 @@
-using Firebase.Firestore;
-using System;
-using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -28,47 +25,17 @@ public class ProfileMaker : MonoBehaviour
 
     [SerializeField] private DelayedUIElementDisplayer _displayer;
 
-    private UserProfileDropDowns.Sex _sex;
-    private UserProfileDropDowns.StartLevel _startLevel;
-    private UserProfileDropDowns.SportExperience _sportExperience;
-    private UserProfileDropDowns.Goal _goal;
+    private UserProfileConstants.Sex _sex;
+    private UserProfileConstants.StartLevel _startLevel;
+    private UserProfileConstants.SportExperience _sportExperience;
+    private UserProfileConstants.Goal _goal;
     private string _avatarPath;
-
-    private Dictionary<string, UserProfileDropDowns.Sex> _profileSexOptions = new Dictionary<string, UserProfileDropDowns.Sex>
-    {
-        { "Мужской" , UserProfileDropDowns.Sex.Male },
-        { "Женский" , UserProfileDropDowns.Sex.Female },
-        { "Скрыть" , UserProfileDropDowns.Sex.Hidden },
-        { "Не указывать", UserProfileDropDowns.Sex.None }
-    };
-
-    private Dictionary<string, UserProfileDropDowns.StartLevel> _profileStartLevelOptions = new Dictionary<string, UserProfileDropDowns.StartLevel>
-    {
-        { "Новичок" , UserProfileDropDowns.StartLevel.Beginner },
-        { "Базовый" , UserProfileDropDowns.StartLevel.Basic },
-        { "Средний" , UserProfileDropDowns.StartLevel.Middle },
-        { "Спортсмен", UserProfileDropDowns.StartLevel.Athlete }
-    };
-
-    private Dictionary<string, UserProfileDropDowns.SportExperience> _profileSportExperienceOptions = new Dictionary<string, UserProfileDropDowns.SportExperience>
-    {
-        { "Секции" , UserProfileDropDowns.SportExperience.Sections },
-        { "Регулярные тренировки" , UserProfileDropDowns.SportExperience.RegularTrainings },
-        { "Просто физкультура" , UserProfileDropDowns.SportExperience.PE },
-    };
-
-    private Dictionary<string, UserProfileDropDowns.Goal> _profileGoalOptions = new Dictionary<string, UserProfileDropDowns.Goal>
-    {
-        { "Сбросить вес" , UserProfileDropDowns.Goal.LossWeight },
-        { "Повысить выносливость" , UserProfileDropDowns.Goal.IncreeseEndurance },
-        { "Другое" , UserProfileDropDowns.Goal.Other },
-    };
 
     private void Start()
     {
         foreach (Button button in _avatarsButtons)
             button.onClick.AddListener(() => SetAvatarPath(button));
-
+        
         _sexDropdown.onValueChanged.AddListener(SetSex);
         _startLevelDropdown.onValueChanged.AddListener(SetStartLevel);
         _sportExperienceDropdown.onValueChanged.AddListener(SetSportExperience);
@@ -88,33 +55,30 @@ public class ProfileMaker : MonoBehaviour
             _firebaseService.SetUserOnAuth(currentUserOnAuth);
 
             Debug.Log(currentUserOnAuth.BasicInfo.AvatarPath);
-
-            PlayerPrefs.SetString(PlayerPrefsKeys.AvatarPath, _avatarPath);
-            PlayerPrefs.Save();
         }
     }
 
     private void SetSex(int sexIndex)
     {
-        _sex = _profileSexOptions[_sexDropdown.options[sexIndex].text];
+        _sex = UserProfileConstants.ProfileSexOptions[_sexDropdown.options[sexIndex].text];
         Debug.Log(_sex);
     }
 
     private void SetStartLevel(int startLevelIndex)
     {
-        _startLevel = _profileStartLevelOptions[_startLevelDropdown.options[startLevelIndex].text];
+        _startLevel = UserProfileConstants.ProfileStartLevelOptions[_startLevelDropdown.options[startLevelIndex].text];
         Debug.Log(_startLevel);
     }
 
     private void SetSportExperience(int sportExperienceIndex)
     {
-        _sportExperience = _profileSportExperienceOptions[_sportExperienceDropdown.options[sportExperienceIndex].text];
+        _sportExperience = UserProfileConstants.ProfileSportExperienceOptions[_sportExperienceDropdown.options[sportExperienceIndex].text];
         Debug.Log(_sportExperience);
     }
 
     private void SetGoal(int goalIndex)
     {
-        _goal = _profileGoalOptions[_goalDropdown.options[goalIndex].text];
+        _goal = UserProfileConstants.ProfileGoalOptions[_goalDropdown.options[goalIndex].text];
         Debug.Log(_goal);
     }
 
