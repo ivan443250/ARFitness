@@ -80,6 +80,8 @@ public class FirebaseAuthManager : MonoBehaviour
 
         if (loginTask.Exception != null)
         {
+            _delayedDisplayer.DisplayElementForSeconds("Данные введены неверно или не введены!", 1);
+
             Debug.LogError(loginTask.Exception);
 
             FirebaseException firebaseException = loginTask.Exception.GetBaseException() as FirebaseException;
@@ -127,14 +129,17 @@ public class FirebaseAuthManager : MonoBehaviour
     {
         if (string.IsNullOrEmpty(email))
         {
+            _delayedDisplayer.DisplayElementForSeconds("Почта не введена!", 1);
             Debug.LogError("email field is empty");
         }
         else if (_passwordRegisterField.text != _confirmPasswordRegisterField.text)
         {
+            _delayedDisplayer.DisplayElementForSeconds("Пароли не совпадают!", 1);
             Debug.LogError("Password does not match");
         }
         else
         {
+            _delayedDisplayer.DisplayElementForSeconds("Данные введены неверно или не введены!", 1);
             Task<AuthResult> registrationTask = _auth.CreateUserWithEmailAndPasswordAsync(email, password);
             AuthResult authResult = await registrationTask.AsUniTask();
 
@@ -150,18 +155,22 @@ public class FirebaseAuthManager : MonoBehaviour
                 {
                     case AuthError.InvalidEmail:
                         failedMessage += "Email is invalid";
+                        _delayedDisplayer.DisplayElementForSeconds("Почта не валидна!", 1);
                         break;
                     case AuthError.WrongPassword:
                         failedMessage += "Wrong Password";
+                        _delayedDisplayer.DisplayElementForSeconds("Неправильный пароль!", 1);
                         break;
                     case AuthError.MissingEmail:
                         failedMessage += "Email is missing";
+                        _delayedDisplayer.DisplayElementForSeconds("Почта не указана!", 1);
                         break;
                     case AuthError.MissingPassword:
                         failedMessage += "Password is missing";
+                        _delayedDisplayer.DisplayElementForSeconds("Пароль не указан!", 1);
                         break;
                     case AuthError.EmailAlreadyInUse:
-                        _delayedDisplayer.DisplayElementForSeconds(1);
+                        _delayedDisplayer.DisplayElementForSeconds("Такая почта уже используется!", 1);
                         break;
                     default:
                         failedMessage = "Registration Failed";
