@@ -47,7 +47,7 @@ public class FirebaseAuthManager : MonoBehaviour
     }
 
     // Track state changes of the auth object.
-    private void AuthStateChanged(object sender, System.EventArgs eventArgs)
+    private void AuthStateChanged(object sender, EventArgs eventArgs)
     {
         if (_auth.CurrentUser != _user)
         {

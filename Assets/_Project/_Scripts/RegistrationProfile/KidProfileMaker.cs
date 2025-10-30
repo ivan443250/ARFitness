@@ -7,7 +7,7 @@ using Zenject;
 
 public class KidProfileMaker : MonoBehaviour
 {
-    [Inject] private FirebaseService _firebaseService;
+    [Inject] private IFirebaseService _firebaseService;
 
     [SerializeField] private TMP_InputField _parentEmail;
     [SerializeField] private Toggle _parentAcception;
