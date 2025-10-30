@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 namespace UnitySaveTool
 {
-    public interface IAsyncFileSystem
+    public interface IAsyncDataStore
     {
         UniTask SaveAsync(object objectToSave, params string[] folders);
         UniTask SaveAllAsync(Dictionary<Type, object> objectsToSave, params string[] folders);

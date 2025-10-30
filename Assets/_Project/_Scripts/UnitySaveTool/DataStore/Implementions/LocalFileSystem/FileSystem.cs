@@ -7,7 +7,7 @@ using UnityEngine;
 
 namespace UnitySaveTool
 {
-    public class FileSystem : IFileSystem, IAsyncFileSystem
+    public class FileSystem : IDataStore, IAsyncDataStore
     {
         private readonly string _globalPath;
 

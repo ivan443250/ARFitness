@@ -11,7 +11,7 @@ namespace UnitySaveTool.Test
         static GlobalData()
         {
             _context = new();
-            _context.RegisterInstance<ISaveToolBindInstaller>(new SaveToolBindInstaller(_context, _context.Resolve<IDataExplorer>()));
+            //_context.RegisterInstance<ISaveToolBindInstaller>(new SaveToolBindInstaller(_context, _context.Resolve<IDataExplorer>()));
         }
     }
 

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace UnitySaveTool
 {
-    public interface IFileSystem
+    public interface IDataStore
     {
         void Save(object objectToSave, params string[] folders);
         void SaveAll(Dictionary<Type, object> objectsToSave, params string[] folders);
