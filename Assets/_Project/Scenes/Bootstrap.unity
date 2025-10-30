@@ -4213,9 +4213,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1790915582}
-        m_TargetAssemblyTypeName: RegistrationUIController, Assembly-CSharp
-        m_MethodName: ShowEmailRegistration
+      - m_Target: {fileID: 33343953}
+        m_TargetAssemblyTypeName: FirebaseAuthManager, Assembly-CSharp
+        m_MethodName: Register
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -7147,11 +7147,6 @@ MonoBehaviour:
   _GDPR: {fileID: 783406503}
   _COPPA: {fileID: 1778991965}
   _displayer: {fileID: 928318861}
-  _sex: 0
-  _startLevel: 0
-  _sportExperience: 0
-  _goal: 0
-  _avatarPath: 
 --- !u!114 &928318861
 MonoBehaviour:
   m_ObjectHideFlags: 0
