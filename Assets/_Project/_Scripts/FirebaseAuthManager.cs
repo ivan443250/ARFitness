@@ -7,6 +7,8 @@ using UnityEngine.SceneManagement;
 using Zenject;
 using Cysharp.Threading.Tasks;
 using System.Threading.Tasks;
+using System.Collections.Generic;
+using System;
 
 public class FirebaseAuthManager : MonoBehaviour
 {
@@ -20,15 +22,15 @@ public class FirebaseAuthManager : MonoBehaviour
     private FirebaseAuth _auth;
 
     [Space]
-    [Header("Login")]
-    [SerializeField] private TMP_InputField emailLoginField;
-    [SerializeField] private TMP_InputField passwordLoginField;
+    [Header("LoginWithEmail")]
+    [SerializeField] private TMP_InputField _emailLoginField;
+    [SerializeField] private TMP_InputField _passwordLoginField;
 
     [Space]
     [Header("Registration")]
-    [SerializeField] private TMP_InputField emailRegisterField;
-    [SerializeField] private TMP_InputField passwordRegisterField;
-    [SerializeField] private TMP_InputField confirmPasswordRegisterField;
+    [SerializeField] private TMP_InputField _emailRegisterField;
+    [SerializeField] private TMP_InputField _passwordRegisterField;
+    [SerializeField] private TMP_InputField _confirmPasswordRegisterField;
 
     [SerializeField] private DelayedUIElementDisplayer _delayedDisplayer;
 
@@ -65,9 +67,9 @@ public class FirebaseAuthManager : MonoBehaviour
         }
     }
 
-    public void Login()
+    public void LoginWithEmail()
     {
-        StartCoroutine(LoginWithEmailAsync(emailLoginField.text, passwordLoginField.text));
+        StartCoroutine(LoginWithEmailAsync(_emailLoginField.text, _passwordLoginField.text));
     }
 
     private IEnumerator LoginWithEmailAsync(string email, string password)
@@ -83,7 +85,7 @@ public class FirebaseAuthManager : MonoBehaviour
             FirebaseException firebaseException = loginTask.Exception.GetBaseException() as FirebaseException;
             AuthError authError = (AuthError)firebaseException.ErrorCode;
 
-            string failedMessage = "Login Failed! Because ";
+            string failedMessage = "LoginWithEmail Failed! Because ";
 
             switch (authError)
             {
@@ -100,7 +102,7 @@ public class FirebaseAuthManager : MonoBehaviour
                     failedMessage += "Password is missing";
                     break;
                 default:
-                    failedMessage = "Login Failed";
+                    failedMessage = "LoginWithEmail Failed";
                     break;
             }
 
@@ -116,9 +118,9 @@ public class FirebaseAuthManager : MonoBehaviour
         }
     }
 
-    public async void Register()
+    public async void RegisterWithEmail()
     {
-        await RegisterAsync(emailRegisterField.text, passwordRegisterField.text, confirmPasswordRegisterField.text);
+        await RegisterAsync(_emailRegisterField.text, _passwordRegisterField.text, _confirmPasswordRegisterField.text);
     }
 
     private async UniTask RegisterAsync(string email, string password, string confirmPassword)
@@ -127,7 +129,7 @@ public class FirebaseAuthManager : MonoBehaviour
         {
             Debug.LogError("email field is empty");
         }
-        else if (passwordRegisterField.text != confirmPasswordRegisterField.text)
+        else if (_passwordRegisterField.text != _confirmPasswordRegisterField.text)
         {
             Debug.LogError("Password does not match");
         }
@@ -173,8 +175,8 @@ public class FirebaseAuthManager : MonoBehaviour
                 _user = authResult.User;
 
                 var newUser = new CloudUserModel(
-                uid: _user.UserId,
-                email: _user.Email
+                    uid: _user.UserId,
+                    email: _user.Email
                 );
 
                 newUser.Profile.Auth.AuthMethod = "email";
@@ -189,6 +191,38 @@ public class FirebaseAuthManager : MonoBehaviour
 
                 _UIStateManager.ChangeUIState(RegistrationUIState.Profile);
             }
+        }
+    }
+
+    public async void LoginWithSocialNetworks()
+    {
+        var googleProvider = new FederatedOAuthProvider();
+
+        googleProvider.SetProviderData(new FederatedOAuthProviderData()
+        {
+            ProviderId = "google.com",
+        });
+
+        try
+        {
+            AuthResult authResult = await _auth.SignInWithProviderAsync(googleProvider);
+            _user = authResult.User;
+
+            var newUser = new CloudUserModel(
+                uid: _user.UserId,
+                email: _user.Email
+            );
+
+            newUser.Profile.Auth.AuthMethod = "google";
+            newUser.Profile.Auth.IsGuest = false;
+
+            _firebaseService.SetUserOnAuth(newUser);
+
+            _UIStateManager.ChangeUIState(RegistrationUIState.Profile);
+        }
+        catch (Exception ex)
+        {
+            Debug.Log($"{ex.Message}");
         }
     }
 }
