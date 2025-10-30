@@ -14217,7 +14217,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3303dd02b37eb8f498cdf4122614f8be, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _firebaseAuthManager: {fileID: 0}
+  _firebaseAuthManager: {fileID: 33343953}
 --- !u!1 &2020125588
 GameObject:
   m_ObjectHideFlags: 0
