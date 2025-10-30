@@ -24,4 +24,9 @@ public class RegistrationUIController : MonoBehaviour
     {
         _UIStateManager.ChangeUIState(RegistrationUIState.ParentsAcception);
     }
+
+    public void ShowGuestProfileMaker()
+    {
+        _UIStateManager.ChangeUIState(RegistrationUIState.GuestProfile);
+    }
 }
