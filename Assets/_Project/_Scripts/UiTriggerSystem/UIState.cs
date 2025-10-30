@@ -12,6 +12,7 @@ public enum RegistrationUIState
     SocialNetworksLogIn,
     EmailRegistration,
     EmailLogIn,
+    GuestProfile,
     Profile,
     ParentsAcception,
 }
