@@ -9,7 +9,7 @@ public class KidProfileMaker : MonoBehaviour
 {
     [Inject] private FirebaseService _firebaseService;
 
-    [SerializeField] private TMP_Text _parentEmail;
+    [SerializeField] private TMP_InputField _parentEmail;
     [SerializeField] private Toggle _parentAcception;
 
     [SerializeField] private DelayedUIElementDisplayer _displayer;
