@@ -149,7 +149,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 33343952}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d1eaa672ebf16a04f943a6c436765b9c, type: 3}
+  m_Script: {fileID: 11500000, guid: 5bdf1375108a93746a679c64ec52f733, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   emailLoginField: {fileID: 130576848}
@@ -182,7 +182,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 33343952}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f376bc7c779b69c49baf1ae38c0bc292, type: 3}
+  m_Script: {fileID: 11500000, guid: 0aa0736e6576a474c9c4965c943bbb4c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   _element: {fileID: 2068102239}
@@ -390,9 +390,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 33343952}
         m_TargetAssemblyTypeName: ObjectsStateController, Assembly-CSharp
-        m_MethodName: ChangeState
+        m_MethodName: 
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -7147,6 +7147,11 @@ MonoBehaviour:
   _GDPR: {fileID: 783406503}
   _COPPA: {fileID: 1778991965}
   _displayer: {fileID: 928318861}
+  _sex: 0
+  _startLevel: 0
+  _sportExperience: 0
+  _goal: 0
+  _avatarPath: 
 --- !u!114 &928318861
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8994,10 +8999,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 1240075966}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d08c0b91c5fe9c14f9b621874f806b01, type: 3}
+  m_Script: {fileID: 11500000, guid: 12948460e08fd834185b80d3eb0456ad, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _bootstrap: {fileID: 0}
 --- !u!114 &1240075969
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9041,9 +9045,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 1240075966}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 39a0985a231abb347ae1237b1ae3afb9, type: 3}
+  m_Script: {fileID: 11500000, guid: 05202291bd3f2c548976ed4db865434c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _bootstrap: {fileID: 2017205676}
 --- !u!114 &1240075971
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9053,7 +9058,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1240075966}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c4cbfca4965b29e469db15f0ac7cfff8, type: 3}
+  m_Script: {fileID: 11500000, guid: 4e060d016ba850e47aad0fb7ad4b9cce, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &1244777243
@@ -10075,7 +10080,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1453782080}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8053c98c050326f40953371657e762bc, type: 3}
+  m_Script: {fileID: 11500000, guid: faaad51afafcc0a48a476f3e1d0a8bfe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   _visibleInStates:
@@ -12001,6 +12006,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 88ba0ca5659447d45ba4e156ecc9002c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _bootstrap: {fileID: 0}
 --- !u!114 &1794842771
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -14214,7 +14220,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 2017205674}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3303dd02b37eb8f498cdf4122614f8be, type: 3}
+  m_Script: {fileID: 11500000, guid: 9d66b67331ffa5f40a2c06bab939cbce, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   _firebaseAuthManager: {fileID: 33343953}
