@@ -11,12 +11,10 @@ public class Activities : MonoBehaviour
     public List<ActivityData> ActivitiesData { get => _activitiesData; set => _activitiesData = value; }
     public List<ChallengeData> ChallengesData { get => _challengesData; set => _challengesData = value; }
 
-    [Header("UI Reference")]
-    [SerializeField] private Transform _activitiesContent;
-    [SerializeField] private GameObject _activityCardPrefab;
-
     [Header("Firebase Reference")]
     [SerializeField] private FirebaseLoadData _firebaseLoadData;
+
+    public event Action OnDataUpdated;
 
     private void Start()
     {
@@ -34,7 +32,7 @@ public class Activities : MonoBehaviour
         {
             Debug.LogError("FirebaseLoadData not found!");
             LoadTestData();
-            RefreshActivitiesList();
+            NotifyDataUpdated();
         }
     }
 
@@ -42,14 +40,13 @@ public class Activities : MonoBehaviour
     {
         _activitiesData = _firebaseLoadData.Activities;
         _challengesData = _firebaseLoadData.Challenges;
-
-        RefreshActivitiesList();
+        NotifyDataUpdated();
     }
 
     private void OnFirebaseDataLoadFailed()
     {
         LoadTestData();
-        RefreshActivitiesList();
+        NotifyDataUpdated();
     }
 
     private void LoadTestData()
@@ -57,8 +54,8 @@ public class Activities : MonoBehaviour
         _activitiesData = new List<ActivityData>
         {
             new ActivityData {
-                Name = "��������� ����������",
-                Description = "������ �� Firebase �� �����������",
+                Name = "Тестовая активность",
+                Description = "Загрузка из Firebase не удалась",
                 Type = "running"
             }
         };
@@ -66,91 +63,10 @@ public class Activities : MonoBehaviour
         _challengesData = new List<ChallengeData>
         {
             new ChallengeData {
-                Name = "��������� ��������",
-                Description = "������ �� Firebase �� �����������"
+                Name = "Тестовый челлендж",
+                Description = "Загрузка из Firebase не удалась"
             }
         };
-
-    // test data loaded
-    }
-
-    [ContextMenu("Refresh Activities List")]
-    public void RefreshActivitiesList()
-    {
-        if (_activitiesContent == null || _activityCardPrefab == null)
-        {
-            Debug.LogError("UI references not assigned!");
-            return;
-        }
-
-        foreach (Transform child in _activitiesContent)
-        {
-            Destroy(child.gameObject);
-        }
-
-        if (_activitiesData != null && _activitiesData.Count > 0)
-        {
-            foreach (var activity in _activitiesData)
-            {
-                if (activity != null)
-                {
-                    CreateCard(activity);
-                }
-            }
-        }
-
-        if (_challengesData != null && _challengesData.Count > 0)
-        {
-            foreach (var challenge in _challengesData)
-            {
-                if (challenge != null)
-                {
-                    CreateCard(challenge);
-                }
-            }
-        }
-    }
-
-    private void CreateCard(ActivityData activityData)
-    {
-        if (activityData == null)
-        {
-            return;
-        }
-
-        InstantiateCard(card => card.Initialize(activityData));
-    }
-
-    private void CreateCard(ChallengeData challengeData)
-    {
-        if (challengeData == null)
-        {
-            return;
-        }
-
-        InstantiateCard(card => card.Initialize(challengeData));
-    }
-
-    private void InstantiateCard(Action<CardActivity> initAction)
-    {
-        if (_activityCardPrefab == null || _activitiesContent == null)
-        {
-            Debug.LogError("UI references not assigned!");
-            return;
-        }
-
-        var cardGO = Instantiate(_activityCardPrefab, _activitiesContent);
-        var card = cardGO.GetComponent<CardActivity>();
-
-        if (card != null)
-        {
-            initAction?.Invoke(card);
-        }
-        else
-        {
-            Debug.LogError("CardActivity component not found on prefab!");
-            Destroy(cardGO);
-        }
     }
 
     public void UpdateActivitiesData(List<ActivityData> firebaseData)
@@ -170,13 +86,16 @@ public class Activities : MonoBehaviour
         }
 
         _activitiesData.AddRange(firebaseData);
-
-        RefreshActivitiesList();
+        NotifyDataUpdated();
     }
 
     public void RegisterForActivity(ActivityData activityData, DateTime selectedDate)
     {
-        // registration handled elsewhere
+    }
+
+    private void NotifyDataUpdated()
+    {
+        OnDataUpdated?.Invoke();
     }
 
     private void OnDestroy()
